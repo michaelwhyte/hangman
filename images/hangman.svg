@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 495 654">
+<defs>
+    <style>
+        .cls-1{
+            fill: none;
+            stroke: #000;
+            stroke-miterlimit: 10;
+            stroke-width: 10px;
+        }
+    </style>
+</defs>
+<title>Hangman</title>
+<g id="stand" class="stand">
+    <rect y="611" width="495" height="43"/>
+    <rect x="168" y="284" width="611" height="43" transform="translate(168 779) rotate(-90)"/>
+    <rect x="161" width="291" height="43"/>
+</g>
+<g id="rope" class="hangman-part rope">
+    <line class="cls-1" x1="225" y1="108" x2="225" y2="43"/>
+</g>
+<g id="head" class="hangman-part head">
+    <circle class="cls-1" cx="225" cy="165" r="57"/>
+</g>
+<g id="body" class="hangman-part body">
+    <line class="cls-1" x1="225" y1="222" x2="225" y2="409"/>
+</g>
+<g id="left-arm" class="hangman-part left-arm">
+    <line class="cls-1" x1="225" y1="281" x2="123" y2="366"/>
+</g>
+<g id="right-arm" class="hangman-part right-arm">
+    <line class="cls-1" x1="225" y1="281" x2="327" y2="366"/>
+</g>
+<g id="left-leg" class="hangman-part left-leg">
+    <line class="cls-1" x1="225" y1="409" x2="147" y2="544"/>
+</g>
+<g id="right-leg" class="hangman-part right-leg">
+    <line class="cls-1" x1="225" y1="409" x2="303" y2="544"/>
+</g>
+</svg>
