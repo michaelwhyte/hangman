@@ -1,3 +1,124 @@
 @charset "utf-8";
 
 /* Hangman Game Styles */
+
+/* Resets */
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+}
+
+h1, p {
+    margin-top: 0;
+}
+
+/* Typography */
+body {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+p {
+    line-height: 1.4;
+    font-size: 1.2em;
+}
+
+/* General Classes */
+.btn {
+    font-size: 1.6em;
+    display: block;
+    padding: 5px 12px;
+    background-color: #ebebeb;
+    -webkit-appearance: none;
+}
+
+/* Wrapper */
+.wrapper {
+    width: 760px;
+    margin: 30px auto;
+    border: 1px solid black;
+    padding: 30px;
+}
+
+/* Header */
+header {
+    text-align: center;
+}
+
+/* hangman */
+.hangman {
+    width: 42%;
+    margin: 45px auto 45px;
+}
+
+/* Word Container */
+.word-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    height: 60px;
+}
+
+.letter {
+    display: block;
+    text-align: center;
+    line-height: 1;
+    width: 45px;
+    font-size: 3em;
+    margin-right: 8px;
+    border-bottom: 5px solid black;
+}
+
+.letter:last-child {
+    margin-right: 0;
+}
+
+/* Game Controls */
+.game-controls form {
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.game-controls label,
+.game-controls input:not([type="submit"]) {
+    font-size: 1.8em;
+}
+
+.input-group:first-child {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.label-guess {
+    margin-right: 10px;
+}
+
+.input-guess {
+    display: block;
+    height: 40px;
+    padding: 5px;
+    width: 60px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+/* Footer */
+footer p {
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 0.8em;
+}
+
+
+
