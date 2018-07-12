@@ -14,8 +14,9 @@ class Game {
 
     constructor(){
         this.words = ["reindeer", "wolverine", "gorilla", "giraffe", "salamander", "rabbit", "alligator", "kangaroo", "beaver", "hedgehog", "leopard", "cheetah", "turtle", "porcupine", "baboon", "elephant", "antelope", "raccoon", "koala", "panda", "coyote", "squirrel", "baboon", "tiger", "hippopotamus", "chameleon", "warthog", "moose", "chipmunk", "hyena", "badger", "buffalo", "skunk", "orangutan", "anteater", "rhinoceros", "alpaca", "gazelle", "lemur", "jackal", "chimpanzee", "weasel", "gopher", "wolverine", "zebra", "meerkat"]
-        this.originalWords = this.words;
+        this.originalWords = this.words.slice(0);
         this.word;
+        this.wordLength;
         this.maxIncorrectGuesses = 7;
     }
 
@@ -25,6 +26,7 @@ class Game {
         }
 
         this.word = this._selectWord();
+        this.wordLength = this.word.length;
 
         console.log(this.word);
 
@@ -34,7 +36,7 @@ class Game {
         // Check to make sure their is animal
         // left to select
         if(this.words.length === 0){
-            this.words = this.originalWords;
+            this.words = this.originalWords.slice(0);
         }
 
         // Select a random number between
@@ -46,6 +48,10 @@ class Game {
         // delete it from the array and
         // return the selected word
         return  this.words.splice(ranNum, 1).toString();
+    }
+
+    _outputLetters(){
+        
     }
 
 }
