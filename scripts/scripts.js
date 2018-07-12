@@ -29,6 +29,8 @@ class Game {
         this.wordLength = this.word.length;
 
         console.log(this.word);
+        
+        this._outputLetters();
 
     }
 
@@ -51,7 +53,12 @@ class Game {
     }
 
     _outputLetters(){
-        
+        // $.each(this.word, (i, letter) => {
+        //     console.log(letter);
+        // });
+        for(let i = 0, l = this.word.length; i < l; i++){
+            console.log(this.word.charAt(i));
+        }
     }
 
 }
