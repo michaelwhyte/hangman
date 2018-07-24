@@ -18,6 +18,7 @@ class Game {
         this.word;
         this.wordLength;
         this.maxIncorrectGuesses = 7;
+        this.wordContainer = $('#word-container');
     }
 
     init(playAgain){
@@ -57,7 +58,15 @@ class Game {
         //     console.log(letter);
         // });
         for(let i = 0, l = this.word.length; i < l; i++){
-            console.log(this.word.charAt(i));
+            //console.log(this.word.charAt(i));
+            //const letterEl = $('<span />');
+            //letterEl.addClass(`letter ${this.word.charAt(i)}`);
+            //letterEl.data('letter', this.word.charAt(i));
+            const letter = this.word.charAt(i);
+            $('<span />')
+                .addClass(`letter ${letter}`)
+                .data('letter', letter)
+                .appendTo(this.wordContainer);
         }
     }
 
