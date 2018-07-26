@@ -12,19 +12,27 @@ const $gameForm = $('#form-game');
 // Game Class
 class Game {
 
-    constructor(wordContainer, inputEl){
+    constructor(wordContainer, btnStart, inputEl){
         this.words = ["reindeer", "wolverine", "gorilla", "giraffe", "salamander", "rabbit", "alligator", "kangaroo", "beaver", "hedgehog", "leopard", "cheetah", "turtle", "porcupine", "baboon", "elephant", "antelope", "raccoon", "koala", "panda", "coyote", "squirrel", "baboon", "tiger", "hippopotamus", "chameleon", "warthog", "moose", "chipmunk", "hyena", "badger", "buffalo", "skunk", "orangutan", "anteater", "rhinoceros", "alpaca", "gazelle", "lemur", "jackal", "chimpanzee", "weasel", "gopher", "wolverine", "zebra", "meerkat"]
         this.originalWords = this.words.slice(0);
         this.maxIncorrectGuesses = 7;
         this.wordContainer = wordContainer;
+        this.btnStart = btnStart;
         this.guessInput = inputEl;
         this.gameStart = false;
     }
 
     init(playAgain){
+
+        if(playAgain === 'no'){
+            this.wordContainer.children('.letter')
+                              .remove();
+            this.btnStart.show();
+            return;
+        }
+
         if(!playAgain){
-            this.gameStart = true;
-            $btnStart.hide();
+            this.btnStart.hide();
         }
 
         this._setProps();
@@ -85,7 +93,9 @@ class Game {
 
         // Subtract the number of letters guessed
         // from the wordLength
-        this.wordLength - this.wordLength - $letter.length;
+        this.wordLength = this.wordLength - $letter.length;
+
+        console.log(this.wordLength);
 
         // Test if the user has guessed all the letters.
         // If they have, end the game.
@@ -167,6 +177,7 @@ class Game {
     _endGame(win){
 
         this.gameOver = true;
+        this.gameStart = false;
 
         let gameOverMessage;
 
@@ -181,6 +192,8 @@ class Game {
             this.playAgain = confirm('Do you want to play again?'); 
             if(this.playAgain === true){
                     this.init(true);
+            }else{
+               this.init('no'); 
             }
         }, 300);       
 
@@ -201,7 +214,7 @@ class Game {
 
 // Create a new instance of the Game
 // Class
-const game = new Game($('#word-container'), $('#guess'));
+const game = new Game($('#word-container'), $btnStart ,$('#guess'));
 
 console.log(game.words);
 console.log(game.words.length);
