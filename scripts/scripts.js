@@ -18,11 +18,13 @@ class Game {
         this.maxIncorrectGuesses = 7;
         this.wordContainer = wordContainer;
         this.guessInput = inputEl;
+        this.gameStart = false;
     }
 
     init(playAgain){
         if(!playAgain){
-            $btnStart.remove();
+            this.gameStart = true;
+            $btnStart.hide();
         }
 
         this._setProps();
@@ -34,13 +36,23 @@ class Game {
     }
 
     processGuess(){
+        
+        // Check to make sure game has started or if
+        // game is over
+        if(!this.gameStart || this.gameOver){
+            return;
+        }
+
         // Validate guess then check guess
 
         // Get guess and trim value
         let guess = $.trim(this.guessInput.val());
+        
+        // Clear the input
+        this.guessInput.val('');
 
         if(!this._validate(guess)){
-            return false;
+            return;
         }
 
         // Guess is valid...Process guess
@@ -56,15 +68,30 @@ class Game {
         if($letters.length === 0){
             this.incorrectGuesses++;
             this._displayHangman(this.incorrectGuesses);
+            // Check if user has maxed out their
+            // available incorrect guesses
+            // -> if yes end the game
+            if(this.incorrectGuesses === this.maxIncorrectGuesses){
+                this._endGame(false);
+            }
+            return;
         }
 
-        // Check if user has maxed out their
-        // available incorrect guesses
-        // -> if yes end the game
-        if(this.incorrectGuesses === this.maxIncorrectGuesses){
-            this._endGame(false);
-        }
+        // The guessed a correct letter.
+        // Display the letter(s)
+        const $letter = $(`.${guess}`);
 
+        this._displayLetters($letter, guess);
+
+        // Subtract the number of letters guessed
+        // from the wordLength
+        this.wordLength - this.wordLength - $letter.length;
+
+        // Test if the user has guessed all the letters.
+        // If they have, end the game.
+        if(this.wordLength === 0){
+            this._endGame(true);
+        }
 
     }
 
@@ -74,6 +101,7 @@ class Game {
         this.incorrectGuesses = 0;
         this.gameOver = false;
         this.playAgain = false;
+        this.gameStart = true;
     }
 
     _selectWord(){
@@ -131,21 +159,30 @@ class Game {
         $(`#hangman-part-0${partNumber}`).show();
     }
 
+    _displayLetters(el, letter){
+        el.text(letter)
+          .show();
+    }
+
     _endGame(win){
 
         this.gameOver = true;
 
-        if(!win){
-            setTimeout( _ => {
-                alert('Aghhh!!! You Lose!');
-                this.playAgain = confirm('Do you want to play again?');
-            }, 300);
-            
-            if(this.playAgain === true){
-                this.init(true);
-            }
+        let gameOverMessage;
 
+        if(win){
+            gameOverMessage = 'Congratulations!!! You win!';
+        }else{
+            gameOverMessage = 'Aghhh!!! You lose!';
         }
+
+        setTimeout( _ => {
+            alert(gameOverMessage);
+            this.playAgain = confirm('Do you want to play again?'); 
+            if(this.playAgain === true){
+                    this.init(true);
+            }
+        }, 300);       
 
     }
 
