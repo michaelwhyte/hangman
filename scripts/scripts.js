@@ -16,7 +16,7 @@ class Game {
         this.words = ["reindeer", "wolverine", "gorilla", "giraffe", "salamander", "rabbit", "alligator", "kangaroo", "beaver", "hedgehog", "leopard", "cheetah", "turtle", "porcupine", "baboon", "elephant", "antelope", "raccoon", "koala", "panda", "coyote", "squirrel", "baboon", "tiger", "hippopotamus", "chameleon", "warthog", "moose", "chipmunk", "hyena", "badger", "buffalo", "skunk", "orangutan", "anteater", "rhinoceros", "alpaca", "gazelle", "lemur", "jackal", "chimpanzee", "weasel", "gopher", "wolverine", "zebra", "meerkat"]
         this.originalWords = this.words.slice(0);
         this.maxIncorrectGuesses = 7;
-        this.correctLetters = [];
+        this.correctLetters;
         this.hangman = hangman;
         this.wordContainer = wordContainer;
         this.gameForm = gameForm;
@@ -120,6 +120,7 @@ class Game {
         this.word = this._selectWord();
         this.wordLength = this.word.length;
         this.incorrectGuesses = 0;
+        this.correctLetters = [];
         this.playAgain = false;
         this.gameStart = true;
     }
