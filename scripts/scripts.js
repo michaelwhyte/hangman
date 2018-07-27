@@ -12,11 +12,14 @@ const $gameForm = $('#form-game');
 // Game Class
 class Game {
 
-    constructor(wordContainer, btnStart, inputEl){
+    constructor(hangman, wordContainer, gameForm, btnStart, inputEl){
         this.words = ["reindeer", "wolverine", "gorilla", "giraffe", "salamander", "rabbit", "alligator", "kangaroo", "beaver", "hedgehog", "leopard", "cheetah", "turtle", "porcupine", "baboon", "elephant", "antelope", "raccoon", "koala", "panda", "coyote", "squirrel", "baboon", "tiger", "hippopotamus", "chameleon", "warthog", "moose", "chipmunk", "hyena", "badger", "buffalo", "skunk", "orangutan", "anteater", "rhinoceros", "alpaca", "gazelle", "lemur", "jackal", "chimpanzee", "weasel", "gopher", "wolverine", "zebra", "meerkat"]
         this.originalWords = this.words.slice(0);
         this.maxIncorrectGuesses = 7;
+        this.correctLetters = [];
+        this.hangman = hangman;
         this.wordContainer = wordContainer;
+        this.gameForm = gameForm;
         this.btnStart = btnStart;
         this.guessInput = inputEl;
         this.gameStart = false;
@@ -24,15 +27,23 @@ class Game {
 
     init(playAgain){
 
-        if(playAgain === 'no'){
+        // Test for truthy value of playAgain variable.
+        // Values of true and 'no' should pass
+        if(playAgain){
+            this.hangman.hide();
             this.wordContainer.children('.letter')
                               .remove();
+        }
+
+        if(playAgain === 'no'){
             this.btnStart.show();
+            this.gameForm.removeClass('show');
             return;
         }
 
         if(!playAgain){
             this.btnStart.hide();
+            this.gameForm.addClass('show');
         }
 
         this._setProps();
@@ -85,15 +96,15 @@ class Game {
             return;
         }
 
-        // The guessed a correct letter.
-        // Display the letter(s)
-        const $letter = $(`.${guess}`);
+        // Push correct letter into 
+        // correctLetters array
+        this.correctLetters.push(guess);
 
-        this._displayLetters($letter, guess);
+        this._displayLetters($letters, guess);
 
         // Subtract the number of letters guessed
         // from the wordLength
-        this.wordLength = this.wordLength - $letter.length;
+        this.wordLength = this.wordLength - $letters.length;
 
         console.log(this.wordLength);
 
@@ -109,7 +120,6 @@ class Game {
         this.word = this._selectWord();
         this.wordLength = this.word.length;
         this.incorrectGuesses = 0;
-        this.gameOver = false;
         this.playAgain = false;
         this.gameStart = true;
     }
@@ -160,6 +170,11 @@ class Game {
             return false;
         }
 
+        if(this.correctLetters.some(letter => { return letter === value})){
+            alert('Letter already selected. Please choose a different letter.');
+            return false;
+        }
+
         return true;
 
     }
@@ -176,7 +191,7 @@ class Game {
 
     _endGame(win){
 
-        this.gameOver = true;
+        // this.gameOver = true;
         this.gameStart = false;
 
         let gameOverMessage;
@@ -214,7 +229,7 @@ class Game {
 
 // Create a new instance of the Game
 // Class
-const game = new Game($('#word-container'), $btnStart ,$('#guess'));
+const game = new Game($('.hangman-part'), $('#word-container'), $gameForm, $btnStart ,$('#guess'));
 
 console.log(game.words);
 console.log(game.words.length);
