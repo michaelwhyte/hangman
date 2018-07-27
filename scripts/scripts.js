@@ -186,8 +186,7 @@ class Game {
     }
 
     _displayLetters(el, letter){
-        el.text(letter)
-          .show();
+        el.text(letter);
     }
 
     _endGame(win){
