@@ -86,10 +86,14 @@ header {
 }
 
 /* Game Controls */
-.game-controls form {
-    display: flex;
+.form-game {
+    display: none;
     margin-bottom: 30px;
     justify-content: center;
+}
+
+.form-game.show {
+    display: flex;
 }
 
 .game-controls label,
