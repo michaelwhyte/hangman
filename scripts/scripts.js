@@ -170,6 +170,7 @@ class Game {
             return false;
         }
 
+        // Check if value was already correctly guessed
         if(this.correctLetters.some(letter => { return letter === value})){
             alert('Letter already selected. Please choose a different letter.');
             return false;
