@@ -43,7 +43,7 @@ p {
 .wrapper {
     width: 760px;
     margin: 30px auto;
-    border: 1px solid black;
+    border: 1px solid #000;
     padding: 30px;
 }
 
