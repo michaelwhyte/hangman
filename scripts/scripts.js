@@ -58,7 +58,7 @@ class Game {
         
         // Check to make sure game has started or if
         // game is over
-        if(!this.gameStart || this.gameOver){
+        if(!this.gameStart){
             return;
         }
 
